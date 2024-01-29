@@ -7,12 +7,15 @@ function Login({ setUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    const formData = { username, password }
+
     fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username,email, password }),
+      body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
@@ -37,18 +40,7 @@ function Login({ setUser }) {
                 required
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Username
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="email"
-                onChange={(e) => SetEmail(e.target.value)}
-                required
-              />
-            </div>
+            
             <div className="mb-3">
               <label htmlFor="password" className="form-label">
                 Password
